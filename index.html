@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+       <meta charset="UTF-8" />
+       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+       <title>NeanderWeb-V</title>
+   			<link rel="stylesheet" href="css/style.css">
+   </head>
+   <body>
+       <div class="top-bar">
+           <div class="menu-item" id="file">
+               <span class="menu-label">File</span>
+               <div class="dropdown">
+                   <button id="btnLoad">Load</button>
+                   <button id="btnSave">Save</button>
+               </div>
+           </div>
+           <div class="menu-item" id="view">
+               <span class="menu-label">View</span>
+               <div class="dropdown">
+                   <button id="btnHex">Hexadecimal</button>
+                   <button id="btnDec">Decimal</button>
+               </div>
+           </div>
+           <div class="menu-item" id="run">
+               <span class="menu-label">Run</span>
+               <div class="dropdown">
+                   <button id="btnRunProg">Run Program</button>
+                   <button id="btnStep">Step-by-Step</button>
+                   <button id="btnClear">Clear</button>
+               </div>
+           </div>
+           <div class="menu-item" id="modules-btn">Modules</div>
+           <div class="menu-item" id="help-btn">Help</div>
+           <div class="menu-item" id="about-btn">About</div>
+           <button class="theme-switch" id="theme-switch">🌙</button>
+           <button class="language-switch" id="language-switch">EN</button>
+       </div>
+
+       <main class="main-content">
+           <div class="editors">
+               <div class="editor-wrapper" id="editor-wrapper">
+                   <h3 class="editor-title" id="editor-title-text">Edição de Memória</h3>
+                   <div class="editor-container">
+                       <div id="output-left" class="line-counter"></div>
+                       <textarea id="input-left" class="textarea-input" spellcheck="false"></textarea>
+                       <pre id="highlighting-area" class="textarea-highlight" aria-hidden="true"><code></code></pre>
+                   </div>
+               </div>
+               
+               <div class="resizer" id="drag-resizer"></div>
+               
+               <div class="grid-wrapper" id="grid-wrapper">
+                   <h3 class="editor-title" id="grid-title-text">Visualização de Memória</h3>
+                   <div id="memory-grid-container" class="memory-grid-container">
+                   </div>
+               </div>
+           </div>
+
+           <div class="cache-container">
+               <div class="cache-box">
+                   <div class="cache-title">I-Cache (8 bytes)</div>
+                   <div class="cache-stats">
+                       <span>Hits: <span id="icache-hits">0</span></span>
+                       <span>Misses: <span id="icache-misses">0</span></span>
+                   </div>
+                   <div class="cache-line">
+                       <span>Tag: <span id="icache-tag">-</span></span>
+                       <span>Data: <span id="icache-data">[...]</span></span>
+                   </div>
+               </div>
+               <div class="cache-box">
+                   <div class="cache-title">D-Cache (16 bytes)</div>
+                   <div class="cache-stats">
+                       <span>Hits: <span id="dcache-hits">0</span></span>
+                       <span>Misses: <span id="dcache-misses">0</span></span>
+                   </div>
+                   <div class="cache-line">
+                       <span>Tag: <span id="dcache-tag">-</span></span>
+                       <span>Data: <span id="dcache-data">[...]</span></span>
+                   </div>
+               </div>
+           </div>
+
+           <div id="log-container" class="log-container"></div>
+
+           <div class="status-container">
+               <div class="status-box">
+                   <span id="base-display">DEC</span>
+               </div>
+               <div class="status-box flag-box" id="n-flag-box">
+                   <label>N</label>
+               </div>
+               <div class="status-box flag-box" id="z-flag-box">
+                   <label>Z</label>
+               </div>
+               <div class="status-box">
+                   <label for="ac-value">A (AC)</label>
+                   <span id="ac-value">0</span>
+               </div>
+               <div class="status-box" id="b-box">
+                   <label for="b-value">B</label>
+                   <span id="b-value">0</span>
+               </div>
+               <div class="status-box">
+                   <label for="pc-value">PC</label>
+                   <span id="pc-value">0</span>
+               </div>
+               <div class="status-box" id="ix-box">
+                   <label for="ix-value">IX</label>
+                   <span id="ix-value">0</span>
+               </div>
+               <div class="status-box" id="bp-box">
+                   <label for="bp-value">BP</label>
+                   <span id="bp-value">0</span>
+               </div>
+               <div class="status-box vector-box" id="va-box">
+                   <label for="va-value">VA</label>
+                   <span id="va-value">[0, 0, 0, 0]</span>
+               </div>
+               <div class="status-box vector-box" id="vb-box">
+                   <label for="vb-value">VB</label>
+                   <span id="vb-value">[0, 0, 0, 0]</span>
+               </div>
+               <div id="step-controls" class="step-controls">
+                   <button id="btnStopStep" title="Stop">■</button>
+                   <button id="btnNext" title="Next">→</button>
+               </div>
+           </div>
+       </main>
+
+       <div class="modal" id="about-modal">
+           <button class="close-button" id="close-about">X</button>
+           <p class="about-info">
+               <span class="about-name">NeanderWeb-V 1.0.1</span><br />
+               <span class="about-author">JPRL - 2025</span>
+           </p>
+       </div>
+
+       <div class="modal" id="help-modal">
+           <button class="close-button" id="close-help">X</button>
+           <h2 id="help-title" class="modal-title"></h2>
+           <div id="help-content"></div>
+       </div>
+       
+       <div class="modal" id="modules-modal">
+            <button class="close-button" id="close-modules">X</button>
+            <h2 id="modules-title" class="modal-title"></h2>
+            <div id="modules-content">
+                <p id="modules-desc"></p>
+                <div class="module-option">
+                    <input type="radio" id="module-classic" name="module-select" value="classic">
+                    <label for="module-classic" id="module-classic-label">Neander Clássico</label>
+                </div>
+                <div class="module-option">
+                    <input type="radio" id="module-v" name="module-select" value="v">
+                    <label for="module-v" id="module-v-label">Neander-V</label>
+                </div>
+                <div class="module-option">
+                    <input type="radio" id="module-expanded" name="module-select" value="expanded" checked>
+                    <label for="module-expanded" id="module-expanded-label">Neander-V Expandido</label>
+                </div>
+            </div>
+       </div>
+
+       <div class="overlay" id="overlay"></div>
+   	<script type="module" src="js/main.js"></script>
+   </body>
+</html>
