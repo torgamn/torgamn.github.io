@@ -21,6 +21,7 @@
     "log": {
         "executing": "Executing: {0} {1} @{2}",
         "halted": "Program halted.",
+        "threadHalted": "Thread {0} halted.",
         "init": "NeanderWeb-V Simulator initialized.",
         "cleared": "Simulator cleared.",
         "errorPcOutOfBounds": "Error: Program Counter out of bounds.",
@@ -69,7 +70,13 @@
             { "name": "VLDB", "op": 248, "desc": "Loads a vector from memory into the VB register.", "example": "VLDB 60" },
             { "name": "VSTB", "op": 249, "desc": "Stores the vector from VB into memory.", "example": "VSTB 64" },
             { "name": "VADDV", "op": 250, "desc": "Adds VA and VB element by element, storing in VA.", "example": "VADDV" },
-            { "name": "TAS", "op": 225, "desc": "Test-And-Set. If MEM == 0, MEM = 1 and Z = 1 (Acquired). Else, Z = 0.", "example": "TAS 40" }
+            { "name": "TAS", "op": 225, "desc": "Test-And-Set. If MEM == 0, MEM = 1 and Z = 1 (Acquired). Else, Z = 0.", "example": "TAS 40" },
+            { "name": "SPAWN", "op": 226, "desc": "Spawns a new thread starting at the specified address. The returned ID is loaded in AC.", "example": "SPAWN 50" },
+            { "name": "JOIN", "op": 227, "desc": "Blocks current thread until the thread with ID specified at the memory address is finished.", "example": "JOIN 40" },
+            { "name": "YIELD", "op": 228, "desc": "Yields the core voluntarily to the next active thread.", "example": "YIELD" },
+            { "name": "TID", "op": 229, "desc": "Loads the current Thread ID into AC.", "example": "TID" },
+            { "name": "COREID", "op": 230, "desc": "Loads the current Core ID into AC.", "example": "COREID" },
+            { "name": "SWAP", "op": 231, "desc": "Atomically swaps the content of AC with the memory address.", "example": "SWAP 40" }
         ]
     }
 }

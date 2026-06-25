@@ -14,13 +14,15 @@ export const CONSTANTS = {
         "LDIX": 176, "STIX": 177, "LDBP": 192, "STBP": 193,
         "LDX": 208, "STX": 209, "LDBX": 210, "STBX": 211,
         "LDB": 212, "STB": 213, "LDI": 214,
-        "LOOP": 224, "TAS": 225, "VLDB": 248, "VSTB": 249, "VADDV": 250
+        "LOOP": 224, "TAS": 225, "SPAWN": 226, "JOIN": 227, 
+        "YIELD": 228, "TID": 229, "COREID": 230, "SWAP": 231,
+        "VLDB": 248, "VSTB": 249, "VADDV": 250
     },
-    OPERAND_INSTRUCTIONS: ["STA", "LDA", "ADD", "OR", "AND", "JMP", "JN", "JZ", "VLDA", "VSTA", "VADD", "VOR", "VAND", "LDIX", "STIX", "LDBP", "STBP", "LDX", "STX", "LDB", "STB", "LDI", "LOOP", "TAS", "VLDB", "VSTB"],
-    SIMPLE_INSTRUCTIONS: ["NOP", "HLT", "NOT", "VEADD", "VNOT", "LDBX", "STBX", "VADDV"],
+    OPERAND_INSTRUCTIONS: ["STA", "LDA", "ADD", "OR", "AND", "JMP", "JN", "JZ", "VLDA", "VSTA", "VADD", "VOR", "VAND", "LDIX", "STIX", "LDBP", "STBP", "LDX", "STX", "LDB", "STB", "LDI", "LOOP", "TAS", "SPAWN", "JOIN", "SWAP", "VLDB", "VSTB"],
+    SIMPLE_INSTRUCTIONS: ["NOP", "HLT", "NOT", "VEADD", "VNOT", "LDBX", "STBX", "YIELD", "TID", "COREID", "VADDV"],
     VECTOR_INSTRUCTIONS: ["VLDA", "VSTA", "VADD", "VEADD", "VOR", "VAND", "VNOT", "VLDB", "VSTB", "VADDV"],
     CLASSIC_INSTRUCTIONS: ["NOP", "STA", "LDA", "ADD", "OR", "AND", "NOT", "JMP", "JN", "JZ", "HLT"],
-    EXPANDED_ONLY_INSTRUCTIONS: ["LDIX", "STIX", "LDBP", "STBP", "LDX", "STX", "LDBX", "STBX", "LDB", "STB", "LDI", "LOOP", "TAS", "VLDB", "VSTB", "VADDV"]
+    EXPANDED_ONLY_INSTRUCTIONS: ["LDIX", "STIX", "LDBP", "STBP", "LDX", "STX", "LDBX", "STBX", "LDB", "STB", "LDI", "LOOP", "TAS", "SPAWN", "JOIN", "YIELD", "TID", "COREID", "SWAP", "VLDB", "VSTB", "VADDV"]
 };
 
 CONSTANTS.REVERSE_INSTRUCTION_MAP = Object.fromEntries(

@@ -14,6 +14,7 @@ export const ui = {
     ixValue: document.getElementById('ix-value'),
     bpValue: document.getElementById('bp-value'),
     vbValue: document.getElementById('vb-value'),
+    tidValue: document.getElementById('tid-value'), // NOVO
     baseDisplay: document.getElementById('base-display'),
     nFlagBox: document.getElementById('n-flag-box'),
     zFlagBox: document.getElementById('z-flag-box'),
@@ -123,6 +124,10 @@ export function updateBpUI(bp, displayBase, bpValue) {
 export function updateVbUI(vb, displayBase, vbValue) {
     const formattedVb = vb.map(v => formatNumber(v, displayBase));
     vbValue.textContent = `[${formattedVb.join(', ')}]`;
+}
+
+export function updateTidUI(tid, tidValue) {
+    if(tidValue) tidValue.textContent = tid;
 }
 
 export function updateBaseUI(displayBase, baseDisplay) {

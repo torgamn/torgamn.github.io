@@ -21,6 +21,7 @@
     "log": {
         "executing": "Executando: {0} {1} @{2}",
         "halted": "Programa finalizado.",
+        "threadHalted": "Thread {0} finalizada.",
         "init": "Simulador NeanderWeb-V inicializado.",
         "cleared": "Simulador reiniciado.",
         "errorPcOutOfBounds": "Erro: Contador de Programa fora dos limites.",
@@ -69,7 +70,13 @@
             { "name": "VLDB", "op": 248, "desc": "Carrega vetor da memória para o registrador VB.", "example": "VLDB 60" },
             { "name": "VSTB", "op": 249, "desc": "Armazena o vetor de VB na memória.", "example": "VSTB 64" },
             { "name": "VADDV", "op": 250, "desc": "Soma os vetores VA e VB elemento a elemento, armazenando em VA.", "example": "VADDV" },
-            { "name": "TAS", "op": 225, "desc": "Test-And-Set. Se MEM == 0, MEM = 1 e Z = 1 (Livre). Senão, Z = 0 (Ocupado).", "example": "TAS 40" }
+            { "name": "TAS", "op": 225, "desc": "Test-And-Set. Se MEM == 0, MEM = 1 e Z = 1 (Livre). Senão, Z = 0 (Ocupado).", "example": "TAS 40" },
+            { "name": "SPAWN", "op": 226, "desc": "Cria nova thread no endereço indicado. O ID da thread gerada retorna em AC (-1 se limite estourar).", "example": "SPAWN 50" },
+            { "name": "JOIN", "op": 227, "desc": "Bloqueia a thread atual até que a thread alvo (cujo ID está no endereço de memória) finalize.", "example": "JOIN 40" },
+            { "name": "YIELD", "op": 228, "desc": "Cede o core voluntariamente para a próxima thread da fila.", "example": "YIELD" },
+            { "name": "TID", "op": 229, "desc": "Carrega o identificador da thread atual no AC.", "example": "TID" },
+            { "name": "COREID", "op": 230, "desc": "Carrega o identificador do Core atual no AC.", "example": "COREID" },
+            { "name": "SWAP", "op": 231, "desc": "Troca atomicamente o conteúdo de AC com o valor armazenado no endereço de memória.", "example": "SWAP 40" }
         ]
     }
 }

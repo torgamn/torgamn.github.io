@@ -14,11 +14,22 @@ export const state = {
     vb: new Array(CONSTANTS.VECTOR_REG_SIZE).fill(0),
     zeroFlag: true,
     negativeFlag: false,
+    
+    // Concorrência / Threads
+    currentThreadId: 0,
+    coreId: 0,
+    threads: [
+        { active: true, pc: 0, ac: 0, b: 0, va: new Array(CONSTANTS.VECTOR_REG_SIZE).fill(0), ix: 0, bp: 0, vb: new Array(CONSTANTS.VECTOR_REG_SIZE).fill(0), zeroFlag: true, negativeFlag: false },
+        { active: false, pc: 0, ac: 0, b: 0, va: new Array(CONSTANTS.VECTOR_REG_SIZE).fill(0), ix: 0, bp: 0, vb: new Array(CONSTANTS.VECTOR_REG_SIZE).fill(0), zeroFlag: true, negativeFlag: false },
+        { active: false, pc: 0, ac: 0, b: 0, va: new Array(CONSTANTS.VECTOR_REG_SIZE).fill(0), ix: 0, bp: 0, vb: new Array(CONSTANTS.VECTOR_REG_SIZE).fill(0), zeroFlag: true, negativeFlag: false },
+        { active: false, pc: 0, ac: 0, b: 0, va: new Array(CONSTANTS.VECTOR_REG_SIZE).fill(0), ix: 0, bp: 0, vb: new Array(CONSTANTS.VECTOR_REG_SIZE).fill(0), zeroFlag: true, negativeFlag: false }
+    ],
+
     isStepMode: false,
     displayBase: 10,
     leftInputBase: 10,
     currentLanguage: (navigator.language.toLowerCase().startsWith('pt')) ? 'pt' : 'en',
-    currentModule: 'expanded', // Alterado para o modo expandido por padrão
+    currentModule: 'expanded',
     currentTheme: systemPrefersDark ? 'dark' : 'light',
     syntaxColors: null,
     languageStrings: {},
